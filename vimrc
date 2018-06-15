@@ -25,7 +25,7 @@ Plugin 'fatih/vim-go'
 Plugin 'scrooloose/syntastic'
 
 " PEP8代码风格检查
-Plugin 'nvie/vim-flake8'
+" Plugin 'nvie/vim-flake8'
 
 
 " 
@@ -39,7 +39,7 @@ Plugin 'scrooloose/nerdtree' " {
     map <F7> :NERDTreeToggle<CR>
     let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " }
-" Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 " 代码折叠
 Plugin 'tmhedberg/SimpylFold' " {
@@ -137,19 +137,19 @@ let g:go_fmt_command = "goimports"
 let mapleader = ","
 
 " vim-go custom mappings
-" autocmd BufWritePre *.go :GoImports
-" au FileType go nmap <leader>s <Plug>(go-implements)
-" au FileType go nmap <leader>i <Plug>(go-info)
-" au FileType go nmap <leader>gd <Plug>(go-doc)
-" au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
-" au FileType go nmap <leader>r <Plug>(go-run)
-" au FileType go nmap <leader>b <Plug>(go-build)
-" au FileType go nmap <leader>t <Plug>(go-test)
-" au FileType go nmap <leader>c <Plug>(go-coverage)
-" au FileType go nmap <leader>ds <Plug>(go-def-split)
-" au FileType go nmap <leader>dv <Plug>(go-def-vertical)
-" au FileType go nmap <leader>dt <Plug>(go-def-tab)
-" au FileType go nmap <leader>e <Plug>(go-rename)
+ autocmd BufWritePre *.go :GoImports
+ au FileType go nmap <leader>s <Plug>(go-implements)
+ au FileType go nmap <leader>i <Plug>(go-info)
+ au FileType go nmap <leader>gd <Plug>(go-doc)
+ au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+ au FileType go nmap <leader>r <Plug>(go-run)
+ au FileType go nmap <leader>b <Plug>(go-build)
+ au FileType go nmap <leader>t <Plug>(go-test)
+ au FileType go nmap <leader>c <Plug>(go-coverage)
+ au FileType go nmap <leader>ds <Plug>(go-def-split)
+ au FileType go nmap <leader>dv <Plug>(go-def-vertical)
+ au FileType go nmap <leader>dt <Plug>(go-def-tab)
+ au FileType go nmap <leader>e <Plug>(go-rename)
 
 
 " python PEP8 {
@@ -197,6 +197,8 @@ map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " map te :tabedit
 " map tc :tabclose<cr>
 
+" map
+vnoremap // y/<c-r>"<cr>
 
 " set guifont=Literation_Mono_Powerline:h16
 " let g:airline_theme='wombat'
