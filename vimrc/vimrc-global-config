@@ -1,0 +1,67 @@
+echo "loading vimrc-global-config"
+" ##########     
+" GlobalConfigIndent
+	set tabstop=4 "一个制表符的长度
+	set softtabstop=4 "一个制表符的长度（可以大于tabstop）
+	set shiftwidth=4 "一个缩进的长度
+	set expandtab "使用空格替代制表符
+	set smarttab "智能制表符
+	set autoindent "自动缩进
+	set smartindent "只能缩进
+
+" GlobalConfigFold
+	" Enable folding with the spacebar
+	nnoremap <space> za
+	set foldenable      " 允许折叠 
+	set foldmethod=indent "代码折叠
+	" set foldmethod=syntax
+	set foldlevel=999
+	" set foldcolumn=2
+
+" ##########     search
+set ignorecase "检索时忽略大小写
+set hls "检索时高亮显示匹配项
+set incsearch "开启实时搜索功能
+
+" ##########     辅助状态
+set laststatus=2 "始终显示状态栏
+set ruler "显示位置指示器
+set number "显示行号
+
+" ##########     cursorline & cursor column
+set cursorline "突出显示当前行
+" set cursorcolumn " 突出显示当前列
+" highlight CursorLine guibg=lightblue guifg=black ctermbg=lightgray ctermfg=black
+" highlight CursorColumn guibg=lightblue ctermbg=lightgray guifg=black ctermfg=black
+hi CursorLine  cterm=NONE ctermbg=darkred ctermbg=darkred ctermfg=white
+" hi CursorColumn cterm=NONE ctermbg=darkred ctermbg=darkred ctermfg=white
+
+
+set nocompatible " 不要使用vi的键盘模式，而是vim自己的 
+" set paste
+syn on "语法支持
+
+set list
+" set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set listchars=eol:$,tab:\|\ ,trail:~,extends:>,precedes:<
+set backupdir=/tmp "设置备份文件目录
+set directory=/tmp "设置临时文件目录
+set helplang=cn "帮助系统设置为中文
+set textwidth=100 "设置超过100字符自动换行 
+set backspace=indent,eol,start
+set scrolloff=7 " 光标移动到buffer的顶部和底部时保持3行距离
+" set mouse=a "设置在哪些模式下使用鼠标功能，mouse=a 表示所有模式
+" set nowrap "不自动换行
+" let python_highlight_all=1
+filetype on "命令打开文件类型检测功能，它相当于文件类型检测功能的开关
+set fileencodings=utf-8,gbk,gb2312,ucs-bom,chinese,cp936,gb18030,big5,euc-jp,euc-kr,latin1 "设置文件检测编码
+set encoding=utf-8 "设置内部编码
+set fileencoding=utf-8 "设置新建文件保存编码
+set showmatch "设置括号匹配
+set clipboard=unnamed " 系统剪贴板
+" 设置字体 
+" set guifont=Literation_Mono_Powerline:h16
+" set guifont=Powerline_Consolas:h14:cANSI
+set t_Co=256 " 终端开启256色支"
+" colorscheme solarized " TODO 效果有问题
+

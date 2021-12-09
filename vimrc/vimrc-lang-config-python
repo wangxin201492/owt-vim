@@ -1,0 +1,15 @@
+echo "loading vimrc-lang-config-python"
+" 自动缩进
+Plugin 'vim-scripts/indentpython.vim'
+
+" python PEP8 {
+    au BufNewFile,BufRead *.py
+        \ set tagstop=4
+        \ set softtabstop=4
+        \ set shiftwidth=4
+        \ set textwidth=79
+        \ set expandtab
+        \ set autoindent
+        \ set fileformat=unix
+" }
+" echo "load python config done."

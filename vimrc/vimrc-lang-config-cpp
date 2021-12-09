@@ -1,0 +1,10 @@
+echo 'loading vimrc-lang-config-cpp'
+" 优化vim对cpp支持语法高亮插件
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+Plugin 'derekwyatt/vim-fswitch' " {
+	" *.cpp 和 *.h 间切换
+	nmap <silent> <Leader>sw :FSHere<cr>
+" }
+
+

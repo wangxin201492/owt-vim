@@ -1,0 +1,33 @@
+echo "loading vimrc-global-map"
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+map <F6> :set nu!<CR>:set list!<CR>
+
+"关于tab的快捷键
+" map tn :tabnext<cr>
+" map tp :tabprevious<cr>
+" map td :tabnew .<cr>
+" map te :tabedit
+" map tc :tabclose<cr>
+
+" map
+vnoremap // y/<c-r>"<cr>
+
+" Tab操作快捷方式!
+" nnoremap <C-TAB> :tabnext<CR>
+" nnoremap <C-S-TAB> :tabprev<CR>
+
+" 正向遍历同名标签
+nmap <Leader>tn :tnext<CR>
+" 反向遍历同名标签
+nmap <Leader>tp :tprevious<CR>
+
+" 映射切换buffer的键位
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+" nmap <TAB> :bn<cr> "设置tab键映射"
+" nmap <C-TAB> :bp<cr> "设置tab键映射"

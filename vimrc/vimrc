@@ -1,0 +1,96 @@
+
+" ==============================vundle begin
+filetype off                  " required  /** 从这行开始，vimrc配置 **/
+
+" set mapleader
+let mapleader = ","
+
+
+" ###########################################################################
+" ##                                
+" ###########################################################################
+" 如果支持python，那么优先使用YC
+" if has('pythonx')
+" 	let g:useYCM = 1
+" else
+" 	let g:useYCM = 0
+" endif
+
+" #######################################################################################
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+
+" PEP8代码风格检查
+" Plugin 'nvie/vim-flake8'
+
+if filereadable(expand("~/.vimrc-lang-config-cpp"))
+	source ~/.vimrc-lang-config-cpp
+endif
+
+if filereadable(expand("~/.vimrc-lang-config-frontend"))
+	source ~/.vimrc-lang-config-frontend
+endif
+
+if filereadable(expand("~/.vimrc-lang-config-python"))
+	source ~/.vimrc-lang-config-python
+endif
+
+if filereadable(expand("~/.vimrc-lang-config-go"))
+	source ~/.vimrc-lang-config-go
+endif
+
+if filereadable(expand("~/.vimrc-global-plugin"))
+	source ~/.vimrc-global-plugin
+endif
+
+
+"Plugin 'SirVer/ultisnips'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+" Plugin 'user/L9', {'name': 'newL9'}
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+syntax on
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+" ==============================vundle end
+
+if filereadable(expand("~/.vimrc-global-config"))
+  source ~/.vimrc-global-config
+endif
+
+if filereadable(expand("~/.vimrc-global-map"))
+  source ~/.vimrc-global-map
+endif

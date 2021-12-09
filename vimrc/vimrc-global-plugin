@@ -1,0 +1,170 @@
+echo "loading vimrc-global-plugin"
+" 语法检查
+" Plugin 'scrooloose/syntastic'
+
+" air-line
+Plugin 'vim-airline/vim-airline' " {
+	if !exists('g:airline_symbols')
+		let g:airline_symbols = {}
+	endif
+	let g:airline_powerline_fonts = 0   " 使用powerline打过补丁的字体 TODO powerline
+	" 开启tabline
+	let g:airline#extensions#tabline#enabled = 1      "tabline中当前buffer两端的分隔字符
+	let g:airline#extensions#tabline#left_sep = ' '   "tabline中未激活buffer两端的分隔字符
+	let g:airline#extensions#tabline#left_alt_sep = '|'      "tabline中buffer显示编号
+	let g:airline#extensions#tabline#buffer_nr_show = 1
+" }
+Plugin 'vim-airline/vim-airline-themes' " {
+	let g:airline_theme='wombat'
+" }
+
+" format工具, require clang-format
+Plugin 'rhysd/vim-clang-format' " {
+	map <F9> :ClangFormat<CR>
+    let g:clang_format#auto_format_on_insert_leave = 1
+    let g:clang_format#enable_fallback_style = 0
+" }
+
+" Vim undo tree
+Plugin 'sjl/gundo.vim' " {
+	nnoremap <F5> :GundoToggle<CR>
+    let g:gundo_prefer_python3 = 1
+    let g:gundo_right = 1
+	let g:gundo_preview_bottom=1
+" }
+
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'Yggdroot/indentLine' " {
+	let g:indentLine_color_term = 239
+" }
+
+Plugin 'scrooloose/nerdtree' " {
+	map <F7> :NERDTreeToggle<CR>
+	" 打开vim时如果没有文件自动打开NERDTree
+	"autocmd vimenter * if !argc()|NERDTree|endif
+	" 当NERDTree为剩下的唯一窗口时自动关闭
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+	" 打开vim时自动打开NERDTree
+	"autocmd vimenter * NERDTree</cr></F7>
+	" 忽略以下文件的显示
+	let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+    let g:nerdtree_tabs_focus_on_files = 0
+" }
+
+Plugin 'jistr/vim-nerdtree-tabs'
+" 支持NERDTree 插件根据git状态标注文件
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" 
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'vim-scripts/Mark'
+" 代码折叠
+Plugin 'tmhedberg/SimpylFold' " {
+	let g:SimpylFold_docstring_preview=1 " 看到折叠代码的文档字符串
+" }
+
+" 如果支持python, 使用YCM & LeaderF
+if has('pythonx')
+	" *********************************** LeaderF : 文件搜索工具
+	Plugin 'Yggdroot/LeaderF' " {
+		" 搜索文件
+		let g:Lf_ShortcutF = '<c-p>'
+		let g:Lf_ShortcutB = '<m-n>'
+		" 搜索最近使用过的文件( search most recently used files)就是Mru
+		noremap <c-n> :LeaderfMru<cr>
+		" 搜索当前文件的函数
+		noremap <m-p> :LeaderfFunction!<cr>
+		" 搜索当前的Buffer
+		noremap <m-n> :LeaderfBuffer<cr>
+		noremap <m-m> :LeaderfTag<cr>
+		let g:Lf_WildIgnore = {
+					\ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+					\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+					\}
+		 
+		" 按Esc键退出函数列表
+		let g:Lf_NormalMap = {
+			\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+			\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+			\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+			\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+			\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+			\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+			\ }
+	" }
+
+	" YouCompleteMe : 代码自动补全
+	Plugin 'Valloric/YouCompleteMe' " {
+        echo "use YouCompleteMe"
+		" ##############   补全配置
+		let g:ycm_autoclose_preview_window_after_completion=1 " 完成操作之后，自动补全窗口不会消失
+		let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+		let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+		let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+		let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+		let g:ycm_key_list_previous_completion=[ '<C-p>' , '<Up>' ]
+		let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+		let g:ycm_collect_identifiers_from_tags_files = 1
+        let g:ycm_use_clangd = 0
+		"let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+
+		" ##############   跳转配置
+		" 跳转到定义处, 分屏打开
+		" let g:ycm_goto_buffer_command = 'horizontal-split'
+		nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+		nnoremap <leader>ed :YcmCompleter GoToDefinitionElseDeclaration<CR>
+		nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+
+		" ##############   ycm_extra_conf.py 配置
+		" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+		" 这里如果设置了ycm_global_ycm_extra_conf，则会有语法检测；不设置则会有上面的报错
+		" old version
+		" if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
+			" let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+		" endif
+		" " new version
+		" if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+			" let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+		" endif
+		" let g:ycm_confirm_extra_conf = 0
+	" }
+else
+	" 文件搜索工具使用ctrlp
+	Plugin 'ctrlpvim/ctrlp.vim' " {
+		" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+		" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+		"<Leader>b显示缓冲区文件，并可通过序号进行跳转
+		nmap <Leader>b :CtrlPBuffer<CR>
+		"设置搜索时忽略的文件
+		let g:ctrlp_custom_ignore = {
+			\ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+			\ 'file': '\v\.(exe|swp|png|jpg|jpeg|gif|so|dll|zip|tar|tar.gz|pyc)$',
+			\ }
+	" }
+endif
+
+Plugin 'majutsushi/tagbar' " { 
+	nmap <F8> :TagbarToggle<CR>
+" }
+
+" ctags, require ctags
+if executable("ctags") 
+	map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR> 
+endif
+
+
+if executable("ack") 
+	" Plugin 'mileszs/ack.vim' " {
+	" :map <F4> :Ack -i
+	" }
+endif
+
+" 全文检索 ag，require ag 
+if executable("ag") 
+	Plugin 'rking/ag.vim' " {
+		map <F4> :Ag -i 
+        let g:ag_highlight=1
+	" }
+endif
